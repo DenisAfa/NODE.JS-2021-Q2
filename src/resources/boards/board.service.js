@@ -20,13 +20,13 @@ const getBoard = async (req, res) => {
 };
 
 const createBoard = async (req, res) => {
-  const newInfo = req.body;
+  const newBoardInfo = req.body;
 
-  const newBoard = await boardsRepo.createBoard(newInfo);
+  const newBoard = await boardsRepo.createBoard(newBoardInfo);
 
   if (newBoard) res.status(201).json(Board.toResponse(newBoard));
 
-  if (!newInfo)
+  if (!newBoardInfo)
     res.status(401).json({ message: 'Access token is missing or invalid' });
 };
 

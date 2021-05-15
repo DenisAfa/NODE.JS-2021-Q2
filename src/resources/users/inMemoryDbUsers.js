@@ -1,5 +1,5 @@
 const User = require('./user.model');
 
-const DB = [new User({ name: 'Denis' }), new User(), new User()];
+const DB_USERS = [new User({ name: 'Denis' }), new User(), new User()];
 
-module.exports = { DB };
+module.exports = { DB_USERS };

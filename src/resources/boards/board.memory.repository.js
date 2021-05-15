@@ -1,23 +1,23 @@
 const { v4: uuid } = require('uuid');
-const { DB } = require('./inMemoryDbBoards');
+const { DB_BOARDS } = require('./inMemoryDbBoards');
 
-const getAll = async () => DB;
+const getAll = async () => DB_BOARDS;
 
-const getBoard = async (id) => DB.find((elemDB) => elemDB.id === id);
+const getBoard = async (id) => DB_BOARDS.find((elemDB) => elemDB.id === id);
 
 const createBoard = async (newInfo) => {
   const newBoard = { ...newInfo, id: uuid() };
-  DB.push(newBoard);
+  DB_BOARDS.push(newBoard);
 
   return newBoard;
 };
 
 const updateBoard = async (id, newInfo) => {
   let updatedBoard;
-  DB.forEach((elemDB, ind) => {
+  DB_BOARDS.forEach((elemDB, ind) => {
     if (elemDB.id === id) {
-      DB[ind] = { ...elemDB, ...newInfo };
-      updatedBoard = DB[ind];
+      DB_BOARDS[ind] = { ...elemDB, ...newInfo };
+      updatedBoard = DB_BOARDS[ind];
     }
   });
 
@@ -26,9 +26,10 @@ const updateBoard = async (id, newInfo) => {
 
 const deleteBoard = async (id) => {
   let deletedBoard;
-  DB.forEach((elemDB, ind) => {
+
+  DB_BOARDS.forEach((elemDB, ind) => {
     if (elemDB.id === id) {
-      deletedBoard = DB.splice(ind, 1);
+      deletedBoard = DB_BOARDS.splice(ind, 1);
     }
   });
 

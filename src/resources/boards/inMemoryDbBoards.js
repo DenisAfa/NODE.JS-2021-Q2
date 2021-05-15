@@ -1,5 +1,9 @@
 const Board = require('./board.model');
 
-const DB = [new Board({ title: 'DenisBoard' }), new Board(), new Board()];
+const DB_BOARDS = [
+  new Board({ title: 'DenisBoard' }),
+  new Board(),
+  new Board(),
+];
 
-module.exports = { DB };
+module.exports = { DB_BOARDS };

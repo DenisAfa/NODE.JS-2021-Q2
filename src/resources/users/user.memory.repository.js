@@ -1,23 +1,23 @@
 const { v4: uuid } = require('uuid');
-const { DB } = require('./inMemoryDbUsers');
+const { DB_USERS } = require('./inMemoryDbUsers');
 
-const getAll = async () => DB;
+const getAll = async () => DB_USERS;
 
-const getUser = async (id) => DB.find((elemDB) => elemDB.id === id);
+const getUser = async (id) => DB_USERS.find((elemDB) => elemDB.id === id);
 
 const createUser = async (userInfo) => {
   const newUser = { ...userInfo, id: uuid() };
-  DB.push(newUser);
+  DB_USERS.push(newUser);
 
   return newUser;
 };
 
 const updateUser = async (id, newUserInfo) => {
   let updatedUser;
-  DB.forEach((elemDB, ind) => {
+  DB_USERS.forEach((elemDB, ind) => {
     if (elemDB.id === id) {
-      DB[ind] = { ...elemDB, ...newUserInfo };
-      updatedUser = DB[ind];
+      DB_USERS[ind] = { ...elemDB, ...newUserInfo };
+      updatedUser = DB_USERS[ind];
     }
   });
 
@@ -26,9 +26,9 @@ const updateUser = async (id, newUserInfo) => {
 
 const deleteUser = async (id) => {
   let deletedUser;
-  DB.forEach((elemDB, ind) => {
+  DB_USERS.forEach((elemDB, ind) => {
     if (elemDB.id === id) {
-      deletedUser = DB.splice(ind, 1);
+      deletedUser = DB_USERS.splice(ind, 1);
     }
   });
 
