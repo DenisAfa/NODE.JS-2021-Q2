@@ -8,8 +8,7 @@ const getTasks = async (req, res) => {
 };
 
 const getTask = async (req, res) => {
-  const { id } = req.params;
-  const { boardId } = req.params;
+  const { id, boardId } = req.params;
 
   const task = await tasksRepo.getTask(id, boardId);
 
@@ -31,8 +30,7 @@ const createTask = async (req, res) => {
 };
 
 const updateTask = async (req, res) => {
-  const { id } = req.params;
-  const { boardId } = req.params;
+  const { id, boardId } = req.params;
   const updateInfo = req.body;
 
   const updatedTask = await tasksRepo.updateTask(id, boardId, updateInfo);
@@ -43,14 +41,12 @@ const updateTask = async (req, res) => {
 };
 
 const deleteTask = async (req, res) => {
-  const { id } = req.params;
-  const { boardId } = req.params;
+  const { id, boardId } = req.params;
 
   const deletedTask = await tasksRepo.deleteTask(id, boardId);
 
-  if (deletedTask) {
-    res.status(200).json({ message: 'The task has been deleted' });
-  }
+  if (deletedTask)
+    res.status(204).json({ message: 'The task has been deleted' });
 
   if (!deletedTask) res.status(404).json({ message: 'Task not found' });
 };

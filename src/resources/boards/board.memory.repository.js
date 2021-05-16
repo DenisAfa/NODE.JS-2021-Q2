@@ -1,12 +1,12 @@
-const { v4: uuid } = require('uuid');
 const { DB_BOARDS } = require('./inMemoryDbBoards');
+const Board = require('./board.model');
 
 const getAll = async () => DB_BOARDS;
 
 const getBoard = async (id) => DB_BOARDS.find((elemDB) => elemDB.id === id);
 
 const createBoard = async (newInfo) => {
-  const newBoard = { ...newInfo, id: uuid() };
+  const newBoard = new Board({ ...newInfo });
   DB_BOARDS.push(newBoard);
 
   return newBoard;
