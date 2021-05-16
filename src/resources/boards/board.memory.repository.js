@@ -1,23 +1,23 @@
-const { DB_BOARDS } = require('./inMemoryDbBoards');
+const { boards } = require('../../inMemoryDB/inMemoryDB');
 const Board = require('./board.model');
 
-const getAll = async () => DB_BOARDS;
+const getAll = async () => boards;
 
-const getBoard = async (id) => DB_BOARDS.find((elemDB) => elemDB.id === id);
+const getBoard = async (id) => boards.find((elemDB) => elemDB.id === id);
 
 const createBoard = async (newInfo) => {
   const newBoard = new Board({ ...newInfo });
-  DB_BOARDS.push(newBoard);
+  boards.push(newBoard);
 
   return newBoard;
 };
 
 const updateBoard = async (id, newInfo) => {
   let updatedBoard;
-  DB_BOARDS.forEach((elemDB, ind) => {
+  boards.forEach((elemDB, ind) => {
     if (elemDB.id === id) {
-      DB_BOARDS[ind] = { ...elemDB, ...newInfo };
-      updatedBoard = DB_BOARDS[ind];
+      boards[ind] = { ...elemDB, ...newInfo };
+      updatedBoard = boards[ind];
     }
   });
 
@@ -27,9 +27,9 @@ const updateBoard = async (id, newInfo) => {
 const deleteBoard = async (id) => {
   let deletedBoard;
 
-  DB_BOARDS.forEach((elemDB, ind) => {
+  boards.forEach((elemDB, ind) => {
     if (elemDB.id === id) {
-      deletedBoard = DB_BOARDS.splice(ind, 1);
+      deletedBoard = boards.splice(ind, 1);
     }
   });
 
