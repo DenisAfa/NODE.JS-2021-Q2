@@ -1,5 +1,20 @@
 const { v4: uuid } = require('uuid');
 
+/**
+ * Board
+ * @typedef {Object} Board
+ * @property {string} id - board id
+ * @property {string} title - board title
+ * @property {Array<Column>} - board columns
+ */
+
+/**
+ * Column
+ * @typedef {Object} Column
+ * @property {string} id - column id
+ * @property {string} title - column title
+ * @property {number} order - column order
+ */
 class Board {
   constructor({
     id = uuid(),
