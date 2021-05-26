@@ -1,4 +1,4 @@
-const { v4: uuid } = require('uuid');
+import { v4 as uuid } from 'uuid'; // ПРОВЕРИТЬ
 
 /**
  * Board
@@ -15,6 +15,19 @@ const { v4: uuid } = require('uuid');
  * @property {string} title - column title
  * @property {number} order - column order
  */
+
+interface Column {
+  id: string;
+  title: string;
+  order: number;
+}
+
+interface Board {
+  id: string;
+  title: string;
+  columns: Array<Column>;
+}
+
 class Board {
   constructor({
     id = uuid(),
@@ -32,10 +45,10 @@ class Board {
     this.columns = columns;
   }
 
-  static toResponse(board) {
+  static toResponse(board: Board) {
     const { id, title, columns } = board;
     return { id, title, columns };
   }
 }
 
-module.exports = Board;
+export { Board };

@@ -1,4 +1,4 @@
-const { v4: uuid } = require('uuid');
+import { v4 as uuid } from 'uuid';
 
 /**
  * Task
@@ -11,6 +11,17 @@ const { v4: uuid } = require('uuid');
  * @property {string} boardId - board id for task
  * @property {string} columnId - column id for task
  */
+
+interface Task {
+  id: string;
+  title: string;
+  order: number;
+  description: string;
+  userId: string | null;
+  boardId: string;
+  columnId: string;
+}
+
 class Task {
   constructor({
     id = uuid(),
@@ -30,10 +41,10 @@ class Task {
     this.columnId = columnId;
   }
 
-  static toResponse(task) {
+  static toResponse(task: Task) {
     const { id, title, order, description, userId, boardId, columnId } = task;
     return { id, title, order, description, userId, boardId, columnId };
   }
 }
 
-module.exports = Task;
+export { Task };

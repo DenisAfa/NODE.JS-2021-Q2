@@ -1,11 +1,13 @@
-const router = require('express').Router();
-const {
+import express from 'express';
+import {
   getBoards,
   getBoard,
   createBoard,
   updateBoard,
   deleteBoard,
-} = require('./board.service');
+} from './board.service';
+
+const router = express.Router();
 
 router.get('/', getBoards);
 
@@ -17,4 +19,4 @@ router.put('/:id', updateBoard);
 
 router.delete('/:id', deleteBoard);
 
-module.exports = router;
+export default router;

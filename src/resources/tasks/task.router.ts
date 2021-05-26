@@ -1,11 +1,13 @@
-const router = require('express').Router({ mergeParams: true });
-const {
+import express from 'express';
+import {
   getTasks,
   getTask,
   createTask,
   updateTask,
   deleteTask,
-} = require('./task.service');
+} from './task.service';
+
+const router = express.Router({ mergeParams: true });
 
 router.get('/', getTasks);
 
@@ -17,4 +19,4 @@ router.put('/:id', updateTask);
 
 router.delete('/:id', deleteTask);
 
-module.exports = router;
+export default router;
