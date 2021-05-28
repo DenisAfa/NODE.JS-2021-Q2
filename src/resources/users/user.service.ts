@@ -3,7 +3,7 @@ import * as usersRepo from './user.memory.repository';
 import * as tasksRepo from '../tasks/task.memory.repository';
 import { User } from './user.model';
 
-const getUsers = async (res: express.Response) => {
+const getUsers = async (_req: Request, res: express.Response) => {
   const users = await usersRepo.getAll();
 
   res.status(200).json(users.map(User.toResponse));

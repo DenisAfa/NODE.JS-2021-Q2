@@ -3,7 +3,7 @@ import * as boardsRepo from './board.memory.repository';
 import * as tasksRepo from '../tasks/task.memory.repository';
 import { Board } from './board.model';
 
-const getBoards = async (res: express.Response) => {
+const getBoards = async (_req: express.Request, res: express.Response) => {
   const boards = await boardsRepo.getAll();
 
   res.status(200).json(boards.map(Board.toResponse));

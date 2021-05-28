@@ -1,14 +1,5 @@
 import { v4 as uuid } from 'uuid';
 
-/**
- * User
- * @typedef {Object} User
- * @property {string} id - user id
- * @property {string} name - user name
- * @property {string} login - user login
- * @property {string} password - user password
- */
-
 interface User {
   id: string;
   name: string;

@@ -5,7 +5,7 @@ dotenv.config({
   path: path.join(__dirname, '../../.env'),
 });
 
-interface configInterface {
+interface ConfigInterface {
   PORT: string | undefined;
   NODE_ENV: string | undefined;
   MONGO_CONNECTION_STRING: string | undefined;
@@ -13,12 +13,12 @@ interface configInterface {
   AUTH_MODE: boolean;
 }
 
-const config: configInterface = {
-  PORT: process.env['PORT'],
-  NODE_ENV: process.env['NODE_ENV'],
-  MONGO_CONNECTION_STRING: process.env['MONGO_CONNECTION_STRING'],
-  JWT_SECRET_KEY: process.env['JWT_SECRET_KEY'],
-  AUTH_MODE: process.env['AUTH_MODE'] === 'true',
+const config: ConfigInterface = {
+  PORT: process.env.PORT,
+  NODE_ENV: process.env.NODE_ENV,
+  MONGO_CONNECTION_STRING: process.env.MONGO_CONNECTION_STRING,
+  JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+  AUTH_MODE: process.env.AUTH_MODE === 'true',
 };
 
 export { config };

@@ -1,20 +1,4 @@
-import { v4 as uuid } from 'uuid'; // ПРОВЕРИТЬ
-
-/**
- * Board
- * @typedef {Object} Board
- * @property {string} id - board id
- * @property {string} title - board title
- * @property {Array<Column>} - board columns
- */
-
-/**
- * Column
- * @typedef {Object} Column
- * @property {string} id - column id
- * @property {string} title - column title
- * @property {number} order - column order
- */
+import { v4 as uuid } from 'uuid';
 
 interface Column {
   id: string;
@@ -45,7 +29,9 @@ class Board {
     this.columns = columns;
   }
 
-  static toResponse(board: Board) {
+  static toResponse(
+    board: Board
+  ): { id: string; title: string; columns: Array<Column> } {
     const { id, title, columns } = board;
     return { id, title, columns };
   }

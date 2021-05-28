@@ -1,17 +1,5 @@
 import { v4 as uuid } from 'uuid';
 
-/**
- * Task
- * @typedef {Object} Task
- * @property {string} id - task id
- * @property {string} title - task title
- * @property {number} order - task order
- * @property {string} description - task description
- * @property {string} userId - user id for task
- * @property {string} boardId - board id for task
- * @property {string} columnId - column id for task
- */
-
 interface Task {
   id: string;
   title: string;

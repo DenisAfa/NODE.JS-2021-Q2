@@ -2,7 +2,7 @@ import express from 'express';
 import * as tasksRepo from './task.memory.repository';
 import { Task } from './task.model';
 
-const getTasks = async (res: express.Response) => {
+const getTasks = async (_req: express.Request, res: express.Response) => {
   const tasks = await tasksRepo.getAll();
 
   res.status(200).json(tasks.map(Task.toResponse));
@@ -23,9 +23,7 @@ const getTask = async (req: express.Request, res: express.Response) => {
 const createTask = async (req: express.Request, res: express.Response) => {
   const newTaskInfo = req.body;
 
-  const boardId = newTaskInfo.boardId
-    ? newTaskInfo.boardId
-    : req.params['boardId'];
+  const { boardId } = newTaskInfo.boardId ? newTaskInfo : req.params;
 
   const newTask = await tasksRepo.createTask(boardId, newTaskInfo);
 
