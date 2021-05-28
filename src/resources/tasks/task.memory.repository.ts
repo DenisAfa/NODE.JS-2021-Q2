@@ -1,15 +1,36 @@
 import { DB } from '../../inMemoryDB/inMemoryDB';
-import { Task } from './task.model';
+import { Task, ITask } from './task.model';
 
-const getAll = async (): Promise<Array<Task>> => DB.tasks;
+export interface INewTask {
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+  boardId: string;
+  columnId: string;
+}
+
+export interface ITaskUpdateInfo {
+  title?: string;
+  order?: number;
+  description?: string;
+  userId?: string;
+  boardId?: string;
+  columnId?: string;
+}
+
+const getAll = async (): Promise<Array<ITask>> => DB.tasks;
 
 const getTask = async (
   id: string,
   boardId: string
-): Promise<Task | undefined> =>
+): Promise<ITask | undefined> =>
   DB.tasks.find((task) => task.id === id && task.boardId === boardId);
 
-const createTask = async (boardId: string, newInfo: object): Promise<Task> => {
+const createTask = async (
+  boardId: string,
+  newInfo: INewTask
+): Promise<ITask> => {
   const newTask = new Task({ ...newInfo, boardId });
   DB.tasks.push(newTask);
 
@@ -19,9 +40,9 @@ const createTask = async (boardId: string, newInfo: object): Promise<Task> => {
 const updateTask = async (
   id: string,
   boardId: string,
-  updateInfo: object
-): Promise<Task | undefined> => {
-  let updatedTask;
+  updateInfo: ITaskUpdateInfo
+): Promise<ITask | undefined> => {
+  let updatedTask: ITask | undefined;
   DB.tasks.forEach((task, ind) => {
     if (task.id === id && task.boardId === boardId) {
       DB.tasks[ind] = { ...task, ...updateInfo };
@@ -35,11 +56,11 @@ const updateTask = async (
 const deleteTask = async (
   id: string,
   boardId: string
-): Promise<Task | undefined> => {
-  let deletedTask;
+): Promise<ITask | undefined> => {
+  let deletedTask: ITask | undefined;
   DB.tasks.forEach((task, ind) => {
     if (task.id === id && task.boardId === boardId) {
-      deletedTask = DB.tasks.splice(ind, 1);
+      [deletedTask] = DB.tasks.splice(ind, 1);
     }
   });
 

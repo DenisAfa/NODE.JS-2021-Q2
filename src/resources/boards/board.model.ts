@@ -1,18 +1,24 @@
 import { v4 as uuid } from 'uuid';
 
-interface Column {
+export interface IColumn {
   id: string;
   title: string;
   order: number;
 }
 
-interface Board {
+export interface IBoard {
   id: string;
   title: string;
-  columns: Array<Column>;
+  columns: Array<IColumn>;
 }
 
-class Board {
+class Board implements IBoard {
+  id: string;
+
+  title: string;
+
+  columns: Array<IColumn>;
+
   constructor({
     id = uuid(),
     title = 'BOARD',
@@ -30,8 +36,8 @@ class Board {
   }
 
   static toResponse(
-    board: Board
-  ): { id: string; title: string; columns: Array<Column> } {
+    board: IBoard
+  ): { id: string; title: string; columns: Array<IColumn> } {
     const { id, title, columns } = board;
     return { id, title, columns };
   }

@@ -1,12 +1,22 @@
 import { DB } from '../../inMemoryDB/inMemoryDB';
-import { Board } from './board.model';
+import { Board, IColumn, IBoard } from './board.model';
 
-const getAll = async (): Promise<Array<Board>> => DB.boards;
+export interface INewBoard {
+  title: string;
+  columns: Array<IColumn>;
+}
 
-const getBoard = async (id: string): Promise<Board | undefined> =>
+export interface IBoardUpdateInfo {
+  title?: string;
+  columns?: Array<IColumn>;
+}
+
+const getAll = async (): Promise<Array<IBoard>> => DB.boards;
+
+const getBoard = async (id: string): Promise<IBoard | undefined> =>
   DB.boards.find((board) => board.id === id);
 
-const createBoard = async (newInfo: object): Promise<Board> => {
+const createBoard = async (newInfo: INewBoard): Promise<IBoard> => {
   const newBoard = new Board({ ...newInfo });
   DB.boards.push(newBoard);
 
@@ -15,9 +25,9 @@ const createBoard = async (newInfo: object): Promise<Board> => {
 
 const updateBoard = async (
   id: string,
-  newInfo: object
-): Promise<Board | undefined> => {
-  let updatedBoard;
+  newInfo: IBoardUpdateInfo
+): Promise<IBoard | undefined> => {
+  let updatedBoard: IBoard | undefined;
   DB.boards.forEach((board, ind) => {
     if (board.id === id) {
       DB.boards[ind] = { ...board, ...newInfo };
@@ -28,12 +38,12 @@ const updateBoard = async (
   return updatedBoard;
 };
 
-const deleteBoard = async (id: string): Promise<Board | undefined> => {
-  let deletedBoard;
+const deleteBoard = async (id: string): Promise<IBoard | undefined> => {
+  let deletedBoard: IBoard | undefined;
 
   DB.boards.forEach((board, ind) => {
     if (board.id === id) {
-      deletedBoard = DB.boards.splice(ind, 1);
+      [deletedBoard] = DB.boards.splice(ind, 1);
     }
   });
 

@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-interface Task {
+export interface ITask {
   id: string;
   title: string;
   order: number;
@@ -10,7 +10,21 @@ interface Task {
   columnId: string;
 }
 
-class Task {
+class Task implements ITask {
+  id: string;
+
+  title: string;
+
+  order: number;
+
+  description: string;
+
+  userId: string | null;
+
+  boardId: string;
+
+  columnId: string;
+
   constructor({
     id = uuid(),
     title = 'TITLE',
@@ -29,7 +43,17 @@ class Task {
     this.columnId = columnId;
   }
 
-  static toResponse(task: Task) {
+  static toResponse(
+    task: ITask
+  ): {
+    id: string;
+    title: string;
+    order: number;
+    description: string;
+    userId: string | null;
+    boardId: string;
+    columnId: string;
+  } {
     const { id, title, order, description, userId, boardId, columnId } = task;
     return { id, title, order, description, userId, boardId, columnId };
   }

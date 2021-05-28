@@ -1,12 +1,24 @@
 import { DB } from '../../inMemoryDB/inMemoryDB';
-import { User } from './user.model';
+import { User, IUser } from './user.model';
 
-const getAll = async (): Promise<Array<User>> => DB.users;
+export interface INewUser {
+  name: string;
+  login: string;
+  password: string;
+}
 
-const getUser = async (id: string): Promise<User | undefined> =>
+export interface IUserUpdateInfo {
+  name?: string;
+  login?: string;
+  password?: string;
+}
+
+const getAll = async (): Promise<Array<IUser>> => DB.users;
+
+const getUser = async (id: string): Promise<IUser | undefined> =>
   DB.users.find((user) => user.id === id);
 
-const createUser = async (userInfo: object): Promise<User> => {
+const createUser = async (userInfo: INewUser): Promise<IUser> => {
   const newUser = new User({ ...userInfo });
   DB.users.push(newUser);
 
@@ -15,9 +27,9 @@ const createUser = async (userInfo: object): Promise<User> => {
 
 const updateUser = async (
   id: string,
-  newUserInfo: object
-): Promise<User | undefined> => {
-  let updatedUser;
+  newUserInfo: IUserUpdateInfo
+): Promise<IUser | undefined> => {
+  let updatedUser: IUser | undefined;
   DB.users.forEach((user, ind) => {
     if (user.id === id) {
       DB.users[ind] = { ...user, ...newUserInfo };
@@ -28,12 +40,12 @@ const updateUser = async (
   return updatedUser;
 };
 
-const deleteUser = async (id: string): Promise<User | undefined> => {
-  let deletedUser;
+const deleteUser = async (id: string): Promise<IUser | undefined> => {
+  let deletedUser: IUser | undefined;
 
   DB.users.forEach((user, ind) => {
     if (user.id === id) {
-      deletedUser = DB.users.splice(ind, 1);
+      [deletedUser] = DB.users.splice(ind, 1);
     }
   });
 

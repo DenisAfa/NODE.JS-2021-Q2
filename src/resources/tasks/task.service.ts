@@ -1,14 +1,15 @@
-import express from 'express';
+import { Request, Response } from 'express';
 import * as tasksRepo from './task.memory.repository';
 import { Task } from './task.model';
+import { INewTask, ITaskUpdateInfo } from './task.memory.repository';
 
-const getTasks = async (_req: express.Request, res: express.Response) => {
+const getTasks = async (_req: Request, res: Response): Promise<void> => {
   const tasks = await tasksRepo.getAll();
 
   res.status(200).json(tasks.map(Task.toResponse));
 };
 
-const getTask = async (req: express.Request, res: express.Response) => {
+const getTask = async (req: Request, res: Response): Promise<void> => {
   const { id, boardId } = req.params;
 
   if (!id || !boardId) {
@@ -20,8 +21,8 @@ const getTask = async (req: express.Request, res: express.Response) => {
   if (task) res.status(200).json(Task.toResponse(task));
 };
 
-const createTask = async (req: express.Request, res: express.Response) => {
-  const newTaskInfo = req.body;
+const createTask = async (req: Request, res: Response): Promise<void> => {
+  const newTaskInfo: INewTask = req.body;
 
   const { boardId } = newTaskInfo.boardId ? newTaskInfo : req.params;
 
@@ -32,9 +33,9 @@ const createTask = async (req: express.Request, res: express.Response) => {
   if (newTask) res.status(201).json(Task.toResponse(newTask));
 };
 
-const updateTask = async (req: express.Request, res: express.Response) => {
+const updateTask = async (req: Request, res: Response): Promise<void> => {
   const { id, boardId } = req.params;
-  const updateInfo = req.body;
+  const updateInfo: ITaskUpdateInfo = req.body;
 
   if (!id || !boardId) {
     throw new Error('Error data');
@@ -47,7 +48,7 @@ const updateTask = async (req: express.Request, res: express.Response) => {
   if (updatedTask) res.status(200).json(Task.toResponse(updatedTask));
 };
 
-const deleteTask = async (req: express.Request, res: express.Response) => {
+const deleteTask = async (req: Request, res: Response): Promise<void> => {
   const { id, boardId } = req.params;
 
   if (!id || !boardId) {
