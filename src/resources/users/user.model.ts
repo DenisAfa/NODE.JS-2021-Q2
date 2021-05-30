@@ -1,11 +1,5 @@
 import { v4 as uuid } from 'uuid';
-
-export interface IUser {
-  id: string;
-  name: string;
-  login: string;
-  password: string;
-}
+import { IUser } from './user.interfaces';
 
 class User implements IUser {
   id: string;
@@ -28,7 +22,7 @@ class User implements IUser {
     this.password = password;
   }
 
-  static toResponse(user: User): { id: string; name: string; login: string } {
+  static toResponse(user: IUser): { id: string; name: string; login: string } {
     const { id, name, login } = user;
     return { id, name, login };
   }

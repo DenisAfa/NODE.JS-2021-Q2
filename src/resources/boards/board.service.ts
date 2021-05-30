@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as boardsRepo from './board.memory.repository';
 import * as tasksRepo from '../tasks/task.memory.repository';
 import { Board } from './board.model';
-import { INewBoard, IBoardUpdateInfo } from './board.memory.repository';
+import { INewBoard, IBoardUpdateInfo } from './board.interfaces';
 
 const getBoards = async (_req: Request, res: Response): Promise<void> => {
   const boards = await boardsRepo.getAll();

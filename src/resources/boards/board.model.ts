@@ -1,16 +1,5 @@
 import { v4 as uuid } from 'uuid';
-
-export interface IColumn {
-  id: string;
-  title: string;
-  order: number;
-}
-
-export interface IBoard {
-  id: string;
-  title: string;
-  columns: Array<IColumn>;
-}
+import { IBoard, IColumn } from './board.interfaces';
 
 class Board implements IBoard {
   id: string;

@@ -1,14 +1,5 @@
 import { v4 as uuid } from 'uuid';
-
-export interface ITask {
-  id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string | null;
-  boardId: string;
-  columnId: string;
-}
+import { ITask } from './task.interfaces';
 
 class Task implements ITask {
   id: string;

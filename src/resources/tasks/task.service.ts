@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as tasksRepo from './task.memory.repository';
 import { Task } from './task.model';
-import { INewTask, ITaskUpdateInfo } from './task.memory.repository';
+import { INewTask, ITaskUpdateInfo } from './task.interfaces';
 
 const getTasks = async (_req: Request, res: Response): Promise<void> => {
   const tasks = await tasksRepo.getAll();

@@ -1,15 +1,6 @@
 import { DB } from '../../inMemoryDB/inMemoryDB';
-import { Board, IColumn, IBoard } from './board.model';
-
-export interface INewBoard {
-  title: string;
-  columns: Array<IColumn>;
-}
-
-export interface IBoardUpdateInfo {
-  title?: string;
-  columns?: Array<IColumn>;
-}
+import { IBoard, IBoardUpdateInfo, INewBoard } from './board.interfaces';
+import { Board } from './board.model';
 
 const getAll = async (): Promise<Array<IBoard>> => DB.boards;
 

@@ -1,23 +1,6 @@
 import { DB } from '../../inMemoryDB/inMemoryDB';
-import { Task, ITask } from './task.model';
-
-export interface INewTask {
-  title: string;
-  order: number;
-  description: string;
-  userId: string;
-  boardId: string;
-  columnId: string;
-}
-
-export interface ITaskUpdateInfo {
-  title?: string;
-  order?: number;
-  description?: string;
-  userId?: string;
-  boardId?: string;
-  columnId?: string;
-}
+import { INewTask, ITaskUpdateInfo, ITask } from './task.interfaces';
+import { Task } from './task.model';
 
 const getAll = async (): Promise<Array<ITask>> => DB.tasks;
 

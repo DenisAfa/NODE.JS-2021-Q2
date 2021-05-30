@@ -1,17 +1,6 @@
 import { DB } from '../../inMemoryDB/inMemoryDB';
-import { User, IUser } from './user.model';
-
-export interface INewUser {
-  name: string;
-  login: string;
-  password: string;
-}
-
-export interface IUserUpdateInfo {
-  name?: string;
-  login?: string;
-  password?: string;
-}
+import { INewUser, IUser, IUserUpdateInfo } from './user.interfaces';
+import { User } from './user.model';
 
 const getAll = async (): Promise<Array<IUser>> => DB.users;
 
@@ -52,4 +41,12 @@ const deleteUser = async (id: string): Promise<IUser | undefined> => {
   return deletedUser;
 };
 
-export { getAll, getUser, createUser, updateUser, deleteUser };
+export {
+  getAll,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  INewUser,
+  IUserUpdateInfo,
+};
