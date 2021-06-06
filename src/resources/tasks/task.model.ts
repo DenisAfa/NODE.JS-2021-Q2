@@ -1,6 +1,21 @@
-const { v4: uuid } = require('uuid');
+import { v4 as uuid } from 'uuid';
+import { ITask } from './task.interfaces';
 
-class Task {
+class Task implements ITask {
+  id: string;
+
+  title: string;
+
+  order: number;
+
+  description: string;
+
+  userId: string | null;
+
+  boardId: string;
+
+  columnId: string;
+
   constructor({
     id = uuid(),
     title = 'TITLE',
@@ -19,10 +34,20 @@ class Task {
     this.columnId = columnId;
   }
 
-  static toResponse(task) {
+  static toResponse(
+    task: ITask
+  ): {
+    id: string;
+    title: string;
+    order: number;
+    description: string;
+    userId: string | null;
+    boardId: string;
+    columnId: string;
+  } {
     const { id, title, order, description, userId, boardId, columnId } = task;
     return { id, title, order, description, userId, boardId, columnId };
   }
 }
 
-module.exports = Task;
+export { Task };
