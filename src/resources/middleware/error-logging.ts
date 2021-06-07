@@ -8,9 +8,9 @@ const errorLogger = (
   res: Response,
   next: NextFunction
 ): void => {
-  const data = new Date();
+  const date = new Date();
   const outputFile = path.join(__dirname, '../../../logs/errors.txt');
-  const information = `Data: ${data.toUTCString()}; Error: ${
+  const information = `Date: ${date.toUTCString()}; Error: ${
     err.message
   }; Type: Internal Server Error \n`;
 
