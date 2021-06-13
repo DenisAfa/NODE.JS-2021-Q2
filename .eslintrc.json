@@ -12,7 +12,7 @@
     "ecmaFeatures": {
       "impliedStrict": true
     },
-    "project": ["./tsconfig.json"]
+    "project": "./tsconfig.json"
   },
   "settings": {
     "noInlineConfig": true,
